@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Cơ bản - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        
+        <h1>Spring Boot Cơ bản: Xây dựng REST API</h1>
+        
+        <p>Spring Boot là framework Java phổ biến nhất để xây dựng ứng dụng web và microservices. Hãy cùng tạo REST API đầu tiên!</p>
+        
+        <h2>1. Spring Boot là gì?</h2>
+        <p>Spring Boot giúp đơn giản hóa việc phát triển ứng dụng Spring bằng cách:</p>
+        <ul>
+            <li>Auto-configuration - Tự động cấu hình</li>
+            <li>Embedded server - Không cần cài Tomcat riêng</li>
+            <li>Starter dependencies - Quản lý dependencies dễ dàng</li>
+            <li>Production-ready features - Sẵn sàng cho production</li>
+        </ul>
+        
+        <h2>2. Tạo Project</h2>
+        <p>Sử dụng Spring Initializr (start.spring.io) để tạo project với:</p>
+        <ul>
+            <li>Spring Web - Cho REST API</li>
+            <li>Spring Data JPA - Làm việc với database</li>
+            <li>H2 Database - Database trong bộ nhớ để test</li>
+        </ul>
+        
+        <h2>3. Tạo Model (Entity)</h2>
+        <pre><code>@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+    private String email;
+    
+    // Constructors, Getters, Setters
+    public User() {}
+    
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+    
+    // Getters và Setters...
+}</code></pre>
+        
+        <h2>4. Tạo Repository</h2>
+        <pre><code>public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    // Spring Data JPA tự động implement
+    // các method cơ bản: save, findById, findAll, delete...
+    
+    // Custom queries
+    List&lt;User&gt; findByName(String name);
+    Optional&lt;User&gt; findByEmail(String email);
+}</code></pre>
+        
+        <h2>5. Tạo REST Controller</h2>
+        <pre><code>@RestController
+@RequestMapping("/api/users")
+public class UserController {
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    // GET tất cả users
+    @GetMapping
+    public List&lt;User&gt; getAllUsers() {
+        return userRepository.findAll();
+    }
+    
+    // GET user theo ID
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+    
+    // POST tạo user mới
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+    
+    // PUT cập nhật user
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        
+        user.setName(userDetails.getName());
+        user.setEmail(userDetails.getEmail());
+        
+        return userRepository.save(user);
+    }
+    
+    // DELETE xóa user
+    @DeleteMapping("/{id}")
+    public ResponseEntity&lt;?&gt; deleteUser(@PathVariable Long id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        
+        userRepository.delete(user);
+        return ResponseEntity.ok().build();
+    }
+}</code></pre>
+        
+        <h2>6. Chạy ứng dụng</h2>
+        <pre><code>@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}</code></pre>
+        
+        <p>Sau khi chạy, API sẽ có sẵn tại: <code>http://localhost:8080/api/users</code></p>
+        
+        <h2>7. Test API với cURL</h2>
+        <pre><code># Tạo user mới
+curl -X POST http://localhost:8080/api/users \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"Huy","email":"huy@example.com"}'
+
+# Lấy tất cả users
+curl http://localhost:8080/api/users
+
+# Lấy user theo ID
+curl http://localhost:8080/api/users/1</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>Bạn đã tạo được REST API đầu tiên với Spring Boot! Framework này rất mạnh mẽ với nhiều tính năng khác như Security, Validation, Exception Handling... Hãy tiếp tục khám phá!</p>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+

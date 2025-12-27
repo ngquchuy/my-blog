@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thao tác DOM với JavaScript - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        
+        <h1>Thao tác DOM với JavaScript</h1>
+        
+        <p>DOM (Document Object Model) là cách JavaScript tương tác với HTML và CSS. Hiểu DOM là bước đầu để làm web interactive!</p>
+        
+        <h2>1. Selecting Elements</h2>
+        <p>Các cách để chọn elements trong DOM:</p>
+        
+        <pre><code>// getElementById
+const header = document.getElementById('header');
+
+// getElementsByClassName - trả về HTMLCollection
+const buttons = document.getElementsByClassName('btn');
+
+// getElementsByTagName
+const paragraphs = document.getElementsByTagName('p');
+
+// querySelector - lấy phần tử đầu tiên
+const firstButton = document.querySelector('.btn');
+const mainDiv = document.querySelector('#main');
+
+// querySelectorAll - lấy tất cả, trả về NodeList
+const allButtons = document.querySelectorAll('.btn');
+const inputs = document.querySelectorAll('input[type="text"]');
+
+// Với querySelectorAll, có thể dùng forEach
+allButtons.forEach(button => {
+    console.log(button);
+});</code></pre>
+        
+        <h2>2. Manipulating Content</h2>
+        <p>Thay đổi nội dung của elements:</p>
+        
+        <pre><code>const element = document.querySelector('#myDiv');
+
+// textContent - chỉ text, không parse HTML
+element.textContent = 'Hello World';
+
+// innerHTML - parse HTML
+element.innerHTML = '&lt;strong&gt;Bold Text&lt;/strong&gt;';
+
+// innerText - giống textContent nhưng tôn trọng CSS styling
+element.innerText = 'Visible Text';
+
+// Lấy giá trị input
+const input = document.querySelector('#username');
+const value = input.value;
+input.value = 'New Value';</code></pre>
+        
+        <h2>3. Modifying Attributes</h2>
+        <p>Thay đổi attributes của elements:</p>
+        
+        <pre><code>const link = document.querySelector('a');
+
+// getAttribute / setAttribute
+const href = link.getAttribute('href');
+link.setAttribute('href', 'https://example.com');
+
+// Trực tiếp
+link.href = 'https://example.com';
+link.target = '_blank';
+
+// Data attributes
+const div = document.querySelector('#myDiv');
+div.dataset.userId = '123';
+div.dataset.userName = 'Huy';
+
+// Access: &lt;div data-user-id="123" data-user-name="Huy"&gt;
+console.log(div.dataset.userId); // '123'
+
+// Class manipulation
+const element = document.querySelector('.box');
+element.classList.add('active');
+element.classList.remove('hidden');
+element.classList.toggle('highlight');
+element.classList.contains('active'); // true/false
+
+// Replace class
+element.classList.replace('old-class', 'new-class');</code></pre>
+        
+        <h2>4. Styling Elements</h2>
+        <p>Thay đổi CSS styles:</p>
+        
+        <pre><code>const box = document.querySelector('.box');
+
+// Inline styles
+box.style.color = 'red';
+box.style.backgroundColor = 'blue';
+box.style.fontSize = '20px';
+box.style.display = 'none';
+
+// Multiple styles
+Object.assign(box.style, {
+    color: 'white',
+    backgroundColor: 'black',
+    padding: '20px',
+    borderRadius: '10px'
+});
+
+// Get computed styles
+const styles = window.getComputedStyle(box);
+console.log(styles.color);
+console.log(styles.fontSize);</code></pre>
+        
+        <h2>5. Creating and Adding Elements</h2>
+        <p>Tạo và thêm elements mới:</p>
+        
+        <pre><code>// createElement
+const newDiv = document.createElement('div');
+newDiv.textContent = 'New Element';
+newDiv.classList.add('box');
+
+// Thêm vào DOM
+const container = document.querySelector('#container');
+container.appendChild(newDiv); // Thêm vào cuối
+container.prepend(newDiv); // Thêm vào đầu
+
+// insertBefore
+const reference = document.querySelector('.existing');
+container.insertBefore(newDiv, reference);
+
+// insertAdjacentHTML
+element.insertAdjacentHTML('beforebegin', '&lt;p&gt;Before&lt;/p&gt;');
+element.insertAdjacentHTML('afterbegin', '&lt;p&gt;Start&lt;/p&gt;');
+element.insertAdjacentHTML('beforeend', '&lt;p&gt;End&lt;/p&gt;');
+element.insertAdjacentHTML('afterend', '&lt;p&gt;After&lt;/p&gt;');
+
+// Clone element
+const clone = newDiv.cloneNode(true); // true = deep clone</code></pre>
+        
+        <h2>6. Removing Elements</h2>
+        <p>Xóa elements khỏi DOM:</p>
+        
+        <pre><code>const element = document.querySelector('.to-remove');
+
+// Modern way
+element.remove();
+
+// Old way
+element.parentNode.removeChild(element);
+
+// Remove all children
+const parent = document.querySelector('#parent');
+parent.innerHTML = '';
+
+// Or
+while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+}</code></pre>
+        
+        <h2>7. Event Handling</h2>
+        <p>Lắng nghe và xử lý events:</p>
+        
+        <pre><code>const button = document.querySelector('#myButton');
+
+// addEventListener
+button.addEventListener('click', function(e) {
+    console.log('Button clicked!');
+    console.log(e.target); // Element được click
+});
+
+// Arrow function
+button.addEventListener('click', (e) => {
+    e.preventDefault(); // Ngăn hành động mặc định
+    console.log('Clicked!');
+});
+
+// Remove event listener
+function handleClick() {
+    console.log('Clicked');
+}
+button.addEventListener('click', handleClick);
+button.removeEventListener('click', handleClick);
+
+// Event delegation
+document.querySelector('#list').addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+        console.log('List item clicked:', e.target.textContent);
+    }
+});
+
+// Common events
+element.addEventListener('mouseenter', handler);
+element.addEventListener('mouseleave', handler);
+input.addEventListener('input', handler);
+input.addEventListener('change', handler);
+form.addEventListener('submit', handler);
+window.addEventListener('scroll', handler);
+window.addEventListener('resize', handler);</code></pre>
+        
+        <h2>8. Traversing the DOM</h2>
+        <p>Di chuyển qua DOM tree:</p>
+        
+        <pre><code>const element = document.querySelector('.current');
+
+// Parent
+const parent = element.parentElement;
+const parentNode = element.parentNode;
+
+// Children
+const children = element.children; // HTMLCollection
+const firstChild = element.firstElementChild;
+const lastChild = element.lastElementChild;
+
+// Siblings
+const nextSibling = element.nextElementSibling;
+const prevSibling = element.previousElementSibling;
+
+// Find closest parent matching selector
+const card = element.closest('.card');
+
+// Check if element matches selector
+element.matches('.active'); // true/false</code></pre>
+        
+        <h2>9. Practical Example</h2>
+        <p>Ví dụ thực tế - Todo List:</p>
+        
+        <pre><code>// HTML: &lt;input id="todoInput"&gt; &lt;button id="addBtn"&gt;Add&lt;/button&gt; &lt;ul id="todoList"&gt;&lt;/ul&gt;
+
+const input = document.querySelector('#todoInput');
+const addBtn = document.querySelector('#addBtn');
+const list = document.querySelector('#todoList');
+
+addBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    if (!text) return;
+    
+    // Tạo li element
+    const li = document.createElement('li');
+    li.textContent = text;
+    
+    // Tạo delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', () => {
+        li.remove();
+    });
+    
+    // Thêm vào DOM
+    li.appendChild(deleteBtn);
+    list.appendChild(li);
+    
+    // Clear input
+    input.value = '';
+});</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>DOM manipulation là kỹ năng cốt lõi trong JavaScript:</p>
+        <ul>
+            <li>querySelector/querySelectorAll để select elements</li>
+            <li>textContent/innerHTML để thay đổi nội dung</li>
+            <li>classList để quản lý classes</li>
+            <li>addEventListener để xử lý events</li>
+            <li>createElement/appendChild để tạo elements</li>
+        </ul>
+        <p>Thực hành nhiều với các project nhỏ để thành thạo!</p>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+

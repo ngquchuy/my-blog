@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục - WxHuyBlog</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Dark Header -->
+    <header class="header-dark">
+        <div class="header-container">
+            <div class="logo">
+                <h2><span>WxHuyBlog</span></h2>
+            </div>
+            <nav class="nav-dark">
+                <ul>
+                    <li><a href="home.html">Trang chủ</a></li>
+                    <li><a href="index.html">Blog</a></li>
+                    <li class="active"><a href="categories.html">Danh mục</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="index.html#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Title Section -->
+    <section class="hero-title">
+        <div class="hero-title-container">
+            <h1>Danh mục</h1>
+            <p>Tìm bài viết theo chủ đề</p>
+        </div>
+    </section>
+
+    <!-- Categories Content -->
+    <div class="categories-page">
+        <div class="categories-container">
+            
+            <!-- Tag Cloud -->
+            <div class="tag-cloud">
+                <h2>Chọn chủ đề</h2>
+                <div class="tags-wrapper">
+                    <button class="tag-btn active" data-tag="all">Tất cả</button>
+                    <button class="tag-btn" data-tag="java">Java</button>
+                    <button class="tag-btn" data-tag="javascript">JavaScript</button>
+                    <button class="tag-btn" data-tag="react">React</button>
+                    <button class="tag-btn" data-tag="spring">Spring Boot</button>
+                    <button class="tag-btn" data-tag="oop">OOP</button>
+                    <button class="tag-btn" data-tag="async">Async</button>
+                    <button class="tag-btn" data-tag="dom">DOM</button>
+                    <button class="tag-btn" data-tag="es6">ES6+</button>
+                    <button class="tag-btn" data-tag="data-structures">Data Structures</button>
+                    <button class="tag-btn" data-tag="error-handling">Error Handling</button>
+                </div>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid-categories">
+                <!-- Post 1 -->
+                <div class="blog-card-cat" data-tags="java oop">
+                    <img src="images/java_string_blog.png" alt="Java String">
+                    <div class="card-content">
+                        <h3>Làm chủ Java String</h3>
+                        <p>Tìm hiểu sâu về String trong Java.</p>
+                        <div class="card-tags">
+                            <span>Java</span>
+                            <span>OOP</span>
+                        </div>
+                        <a href="blog/java-string.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="blog-card-cat" data-tags="java data-structures">
+                    <img src="images/java_collections_blog.png" alt="Java Collections">
+                    <div class="card-content">
+                        <h3>Java Collections Framework</h3>
+                        <p>List, Set, Map và khi nào sử dụng.</p>
+                        <div class="card-tags">
+                            <span>Java</span>
+                            <span>Data Structures</span>
+                        </div>
+                        <a href="blog/java-collections.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="blog-card-cat" data-tags="java oop">
+                    <img src="images/oop_java_blog.png" alt="OOP Java">
+                    <div class="card-content">
+                        <h3>OOP trong Java</h3>
+                        <p>4 tính chất quan trọng của OOP.</p>
+                        <div class="card-tags">
+                            <span>Java</span>
+                            <span>OOP</span>
+                        </div>
+                        <a href="blog/oop-java.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 4 -->
+                <div class="blog-card-cat" data-tags="java error-handling">
+                    <img src="images/exception_handling_blog.png" alt="Exception Handling">
+                    <div class="card-content">
+                        <h3>Xử lý ngoại lệ trong Java</h3>
+                        <p>Try-catch và custom exceptions.</p>
+                        <div class="card-tags">
+                            <span>Java</span>
+                            <span>Error Handling</span>
+                        </div>
+                        <a href="blog/exception-handling.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 5 -->
+                <div class="blog-card-cat" data-tags="spring java">
+                    <img src="images/spring_boot_blog.png" alt="Spring Boot">
+                    <div class="card-content">
+                        <h3>Spring Boot cơ bản</h3>
+                        <p>Xây dựng REST API đầu tiên.</p>
+                        <div class="card-tags">
+                            <span>Spring Boot</span>
+                            <span>Java</span>
+                        </div>
+                        <a href="blog/spring-boot-basics.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 6 -->
+                <div class="blog-card-cat" data-tags="javascript es6">
+                    <img src="images/es6_features_blog.png" alt="ES6 Features">
+                    <div class="card-content">
+                        <h3>Tính năng ES6+</h3>
+                        <p>Arrow functions, destructuring, spread.</p>
+                        <div class="card-tags">
+                            <span>JavaScript</span>
+                            <span>ES6+</span>
+                        </div>
+                        <a href="blog/es6-features.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 7 -->
+                <div class="blog-card-cat" data-tags="javascript async">
+                    <img src="images/async_javascript_blog.png" alt="Async JavaScript">
+                    <div class="card-content">
+                        <h3>Bất đồng bộ JavaScript</h3>
+                        <p>Callbacks, Promises, Async/Await.</p>
+                        <div class="card-tags">
+                            <span>JavaScript</span>
+                            <span>Async</span>
+                        </div>
+                        <a href="blog/async-javascript.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 8 -->
+                <div class="blog-card-cat" data-tags="javascript dom">
+                    <img src="images/dom_manipulation_blog.png" alt="DOM Manipulation">
+                    <div class="card-content">
+                        <h3>Thao tác DOM</h3>
+                        <p>Selecting, creating, modifying elements.</p>
+                        <div class="card-tags">
+                            <span>JavaScript</span>
+                            <span>DOM</span>
+                        </div>
+                        <a href="blog/dom-manipulation.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 9 -->
+                <div class="blog-card-cat" data-tags="javascript react">
+                    <img src="images/react_hooks_blog.png" alt="React Hooks">
+                    <div class="card-content">
+                        <h3>React Hooks</h3>
+                        <p>useState, useEffect và custom hooks.</p>
+                        <div class="card-tags">
+                            <span>JavaScript</span>
+                            <span>React</span>
+                        </div>
+                        <a href="blog/react-hooks.html" class="read-more">Đọc thêm <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" style="display: none;">
+                <i class="ph ph-magnifying-glass"></i>
+                <p>Không có bài viết nào trong danh mục này.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <h2 class="footer-logo">WxHuyBlog</h2>
+            <ul class="footer-links">
+                <li><a href="home.html">Trang chủ</a></li>
+                <li><a href="index.html">Blog</a></li>
+                <li><a href="categories.html">Danh mục</a></li>
+                <li><a href="index.html#contact">Liên hệ</a></li>
+            </ul>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/ngquchuy"><i class="ph ph-facebook-logo"></i></a>
+                <a href="https://github.com/ngquchuy" target="_blank"><i class="ph ph-github-logo"></i></a>
+                <a href="https://www.linkedin.com/in/ngquchuy/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2025. Bảo lưu mọi quyền.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // Tag filtering functionality
+        const tagButtons = document.querySelectorAll('.tag-btn');
+        const blogCards = document.querySelectorAll('.blog-card-cat');
+        const noResults = document.querySelector('.no-results');
+
+        tagButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const selectedTag = button.dataset.tag;
+                let visibleCount = 0;
+
+                // Filter blog cards
+                blogCards.forEach(card => {
+                    const cardTags = card.dataset.tags.split(' ');
+                    
+                    if (selectedTag === 'all' || cardTags.includes(selectedTag)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.3s ease';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            });
+        });
+
+        // Check URL for tag parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagFromUrl = urlParams.get('tag');
+        if (tagFromUrl) {
+            const targetBtn = document.querySelector(`.tag-btn[data-tag="${tagFromUrl}"]`);
+            if (targetBtn) targetBtn.click();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xử lý ngoại lệ trong Java - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        
+        <h1>Xử lý Ngoại lệ trong Java</h1>
+        
+        <p>Exception handling giúp chương trình xử lý lỗi một cách graceful thay vì crash. Hãy cùng tìm hiểu try-catch blocks và custom exceptions!</p>
+        
+        <h2>1. Try-Catch Cơ bản</h2>
+        <p>Cú pháp cơ bản để bắt và xử lý exceptions:</p>
+        
+        <pre><code>public class ExceptionExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0; // ArithmeticException
+            System.out.println(result);
+        } catch (ArithmeticException e) {
+            System.out.println("Không thể chia cho 0!");
+            e.printStackTrace();
+        }
+        
+        System.out.println("Chương trình tiếp tục...");
+    }
+}</code></pre>
+        
+        <h2>2. Multiple Catch Blocks</h2>
+        <p>Bắt nhiều loại exception khác nhau:</p>
+        
+        <pre><code>public void readFile(String filename) {
+    try {
+        FileReader file = new FileReader(filename);
+        BufferedReader reader = new BufferedReader(file);
+        
+        String line = reader.readLine();
+        int number = Integer.parseInt(line);
+        
+        reader.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("File không tồn tại: " + filename);
+    } catch (IOException e) {
+        System.out.println("Lỗi đọc file: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        System.out.println("Dữ liệu không phải số!");
+    } catch (Exception e) {
+        // Catch-all cho các exception khác
+        System.out.println("Lỗi không xác định: " + e);
+    }
+}
+
+// Java 7+: Multi-catch
+try {
+    // some code
+} catch (IOException | SQLException e) {
+    System.out.println("Lỗi IO hoặc SQL: " + e);
+}</code></pre>
+        
+        <h2>3. Finally Block</h2>
+        <p>Code trong finally luôn chạy, bất kể có exception hay không:</p>
+        
+        <pre><code>public void processFile(String filename) {
+    FileReader file = null;
+    try {
+        file = new FileReader(filename);
+        // Process file...
+    } catch (IOException e) {
+        System.out.println("Lỗi: " + e.getMessage());
+    } finally {
+        // Luôn chạy - cleanup resources
+        if (file != null) {
+            try {
+                file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Finally block executed");
+    }
+}
+
+// Try-with-resources (Java 7+) - tốt hơn
+public void processFileModern(String filename) {
+    try (FileReader file = new FileReader(filename);
+         BufferedReader reader = new BufferedReader(file)) {
+        
+        // Process...
+        // Tự động close() trong finally
+        
+    } catch (IOException e) {
+        System.out.println("Lỗi: " + e.getMessage());
+    }
+}</code></pre>
+        
+        <h2>4. Checked vs Unchecked Exceptions</h2>
+        
+        <pre><code>// Checked Exception - phải xử lý hoặc throws
+public void readFile(String path) throws IOException {
+    FileReader file = new FileReader(path); // IOException
+    // ...
+}
+
+// Unchecked Exception - không bắt buộc xử lý
+public void divide(int a, int b) {
+    int result = a / b; // ArithmeticException (unchecked)
+}
+
+// Common checked exceptions:
+// - IOException
+// - SQLException
+// - ClassNotFoundException
+
+// Common unchecked exceptions:
+// - NullPointerException
+// - ArrayIndexOutOfBoundsException
+// - IllegalArgumentException
+// - ArithmeticException</code></pre>
+        
+        <h2>5. Throws và Throw</h2>
+        <p>Ném exception lên method gọi nó:</p>
+        
+        <pre><code>// throws - khai báo method có thể ném exception
+public void validateAge(int age) throws IllegalArgumentException {
+    if (age < 0 || age > 150) {
+        // throw - ném exception
+        throw new IllegalArgumentException("Tuổi không hợp lệ: " + age);
+    }
+}
+
+// Sử dụng
+try {
+    validateAge(-5);
+} catch (IllegalArgumentException e) {
+    System.out.println(e.getMessage());
+}
+
+// Có thể throws nhiều exceptions
+public void complexOperation() 
+        throws IOException, SQLException, ClassNotFoundException {
+    // Method implementation
+}</code></pre>
+        
+        <h2>6. Custom Exceptions</h2>
+        <p>Tạo exception class riêng:</p>
+        
+        <pre><code>// Custom checked exception
+public class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+    
+    public InvalidAgeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+
+// Custom unchecked exception
+public class InsufficientFundsException extends RuntimeException {
+    private double amount;
+    
+    public InsufficientFundsException(double amount) {
+        super("Không đủ tiền: " + amount);
+        this.amount = amount;
+    }
+    
+    public double getAmount() {
+        return amount;
+    }
+}
+
+// Sử dụng
+public class BankAccount {
+    private double balance;
+    
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (amount > balance) {
+            throw new InsufficientFundsException(amount - balance);
+        }
+        balance -= amount;
+    }
+}
+
+// Main
+try {
+    account.withdraw(1000);
+} catch (InsufficientFundsException e) {
+    System.out.println("Thiếu: " + e.getAmount());
+}</code></pre>
+        
+        <h2>7. Best Practices</h2>
+        <ul>
+            <li><strong>Specific Exceptions:</strong> Bắt exception cụ thể thay vì Exception chung chung</li>
+            <li><strong>Don't Swallow:</strong> Không catch rồi không làm gì</li>
+            <li><strong>Use Try-with-resources:</strong> Cho file, connection, stream...</li>
+            <li><strong>Log Exceptions:</strong> Luôn log exception để debug</li>
+            <li><strong>Custom Exceptions:</strong> Tạo exception riêng cho business logic</li>
+        </ul>
+        
+        <pre><code>// ❌ BAD - Swallowing exception
+try {
+    riskyOperation();
+} catch (Exception e) {
+    // Không làm gì - rất nguy hiểm!
+}
+
+// ✅ GOOD - Proper handling
+try {
+    riskyOperation();
+} catch (SpecificException e) {
+    logger.error("Operation failed", e);
+    // Handle hoặc rethrow
+    throw new BusinessException("Cannot process", e);
+}</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>Exception handling là kỹ năng quan trọng trong Java:</p>
+        <ul>
+            <li>Sử dụng try-catch-finally để xử lý lỗi</li>
+            <li>Hiểu sự khác biệt checked vs unchecked</li>
+            <li>Tạo custom exceptions cho business logic</li>
+            <li>Luôn cleanup resources trong finally hoặc try-with-resources</li>
+        </ul>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+

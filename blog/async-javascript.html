@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bất đồng bộ trong JavaScript - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        
+        <h1>Lập trình Bất đồng bộ trong JavaScript</h1>
+        
+        <p>JavaScript là ngôn ngữ single-threaded, nhưng có thể xử lý nhiều tác vụ cùng lúc nhờ lập trình bất đồng bộ. Hãy cùng tìm hiểu Callback, Promise và Async/Await!</p>
+        
+        <h2>1. Callback Functions</h2>
+        <p>Cách truyền thống nhất để xử lý bất đồng bộ:</p>
+        
+        <pre><code>// Callback đơn giản
+function fetchData(callback) {
+    setTimeout(() => {
+        const data = { name: 'Huy', age: 22 };
+        callback(data);
+    }, 1000);
+}
+
+fetchData((data) => {
+    console.log(data); // Sau 1 giây
+});
+
+// Callback hell - vấn đề lớn
+getData((a) => {
+    getMoreData(a, (b) => {
+        getEvenMoreData(b, (c) => {
+            getFinalData(c, (d) => {
+                console.log(d);
+            });
+        });
+    });
+});</code></pre>
+        
+        <h2>2. Promises</h2>
+        <p>Promise giúp code dễ đọc hơn và tránh callback hell:</p>
+        
+        <pre><code>// Tạo Promise
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = true;
+            if (success) {
+                resolve({ name: 'Huy', age: 22 });
+            } else {
+                reject('Error fetching data');
+            }
+        }, 1000);
+    });
+}
+
+// Sử dụng Promise
+fetchData()
+    .then(data => {
+        console.log(data);
+        return data.age;
+    })
+    .then(age => {
+        console.log('Age:', age);
+    })
+    .catch(error => {
+        console.error(error);
+    })
+    .finally(() => {
+        console.log('Done!');
+    });</code></pre>
+        
+        <h2>3. Async/Await</h2>
+        <p>Cú pháp hiện đại nhất, làm code bất đồng bộ trông như đồng bộ:</p>
+        
+        <pre><code>// Async function
+async function getUserData() {
+    try {
+        // Await đợi Promise resolve
+        const user = await fetchUser();
+        const posts = await fetchPosts(user.id);
+        const comments = await fetchComments(posts[0].id);
+        
+        return { user, posts, comments };
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Gọi async function
+getUserData().then(data => console.log(data));
+
+// Hoặc trong async context khác
+async function main() {
+    const data = await getUserData();
+    console.log(data);
+}
+
+main();</code></pre>
+        
+        <h2>4. Promise.all() và Promise.race()</h2>
+        <p>Xử lý nhiều Promise cùng lúc:</p>
+        
+        <pre><code>// Promise.all - đợi tất cả resolve
+async function getAllData() {
+    const [users, posts, comments] = await Promise.all([
+        fetchUsers(),
+        fetchPosts(),
+        fetchComments()
+    ]);
+    
+    return { users, posts, comments };
+}
+
+// Promise.race - lấy kết quả nhanh nhất
+async function getFastestData() {
+    const result = await Promise.race([
+        fetchFromServer1(),
+        fetchFromServer2(),
+        fetchFromServer3()
+    ]);
+    
+    return result; // Từ server nào respond nhanh nhất
+}</code></pre>
+        
+        <h2>5. Error Handling</h2>
+        <p>Xử lý lỗi trong async code:</p>
+        
+        <pre><code>// Try-catch với async/await
+async function safeDataFetch() {
+    try {
+        const data = await fetchData();
+        return data;
+    } catch (error) {
+        console.error('Failed to fetch:', error);
+        return null; // hoặc giá trị mặc định
+    }
+}
+
+// Catch cuối cùng
+async function processData() {
+    const data = await fetchData();
+    const processed = await processData(data);
+    return processed;
+}
+
+processData()
+    .then(result => console.log(result))
+    .catch(error => console.error(error));</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>Lập trình bất đồng bộ là kỹ năng cần thiết trong JavaScript hiện đại:</p>
+        <ul>
+            <li><strong>Callback:</strong> Cơ bản nhưng dễ gây callback hell</li>
+            <li><strong>Promise:</strong> Giải quyết callback hell, code cleaner</li>
+            <li><strong>Async/Await:</strong> Dễ đọc nhất, nên dùng trong code mới</li>
+        </ul>
+        <p>Hãy thực hành với các API thực tế để thành thạo!</p>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+

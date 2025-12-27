@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP trong Java - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        
+        <h1>Lập trình Hướng Đối tượng (OOP) trong Java</h1>
+        
+        <p>OOP là một trong những khái niệm cốt lõi của Java. Hiểu rõ 4 trụ cột của OOP sẽ giúp bạn thiết kế code tốt hơn.</p>
+        
+        <h2>1. Encapsulation (Đóng gói)</h2>
+        <p>Che giấu dữ liệu nội bộ và chỉ cho phép truy cập thông qua các phương thức công khai.</p>
+        
+        <pre><code>public class BankAccount {
+    // Private fields - không thể truy cập trực tiếp
+    private double balance;
+    private String accountNumber;
+    
+    // Public methods để tương tác
+    public double getBalance() {
+        return balance;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+    
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        }
+    }
+}</code></pre>
+        
+        <h2>2. Inheritance (Kế thừa)</h2>
+        <p>Class con kế thừa thuộc tính và phương thức từ class cha.</p>
+        
+        <pre><code>// Class cha
+public class Animal {
+    protected String name;
+    
+    public void eat() {
+        System.out.println(name + " is eating");
+    }
+}
+
+// Class con kế thừa
+public class Dog extends Animal {
+    public void bark() {
+        System.out.println(name + " is barking");
+    }
+}
+
+// Sử dụng
+Dog dog = new Dog();
+dog.name = "Buddy";
+dog.eat();  // Kế thừa từ Animal
+dog.bark(); // Phương thức riêng của Dog</code></pre>
+        
+        <h2>3. Polymorphism (Đa hình)</h2>
+        <p>Một đối tượng có thể có nhiều hình thái khác nhau.</p>
+        
+        <pre><code>// Overloading - Đa hình compile-time
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+    
+    public double add(double a, double b) {
+        return a + b;
+    }
+    
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+// Overriding - Đa hình runtime
+public class Animal {
+    public void makeSound() {
+        System.out.println("Some sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark!");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+// Sử dụng
+Animal myPet = new Dog();
+myPet.makeSound(); // Output: Bark!
+
+myPet = new Cat();
+myPet.makeSound(); // Output: Meow!</code></pre>
+        
+        <h2>4. Abstraction (Trừu tượng)</h2>
+        <p>Ẩn chi tiết implementation, chỉ hiển thị những gì cần thiết.</p>
+        
+        <pre><code>// Abstract class
+public abstract class Shape {
+    protected String color;
+    
+    // Abstract method - bắt buộc override
+    public abstract double calculateArea();
+    
+    // Concrete method
+    public void setColor(String color) {
+        this.color = color;
+    }
+}
+
+public class Circle extends Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+// Interface - trừu tượng 100%
+public interface Drawable {
+    void draw(); // abstract by default
+}
+
+public class Rectangle extends Shape implements Drawable {
+    private double width, height;
+    
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+    
+    @Override
+    public void draw() {
+        System.out.println("Drawing rectangle");
+    }
+}</code></pre>
+        
+        <h2>Lợi ích của OOP</h2>
+        <ul>
+            <li><strong>Modularity:</strong> Code được tổ chức thành các đơn vị độc lập</li>
+            <li><strong>Reusability:</strong> Tái sử dụng code thông qua inheritance</li>
+            <li><strong>Maintainability:</strong> Dễ bảo trì và mở rộng</li>
+            <li><strong>Security:</strong> Bảo vệ dữ liệu qua encapsulation</li>
+        </ul>
+        
+        <h2>Kết luận</h2>
+        <p>4 trụ cột của OOP (Encapsulation, Inheritance, Polymorphism, Abstraction) là nền tảng để viết code Java chuyên nghiệp. Hãy thực hành thường xuyên để thành thạo!</p>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
+

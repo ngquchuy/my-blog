@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Collections Framework - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        <h1>Java Collections Framework</h1>
+        
+        <p>Collections Framework cung cấp các cấu trúc dữ liệu và thuật toán để lưu trữ và xử lý nhóm đối tượng. Hãy cùng tìm hiểu List, Set, Map và khi nào sử dụng chúng!</p>
+        
+        <h2>1. List Interface</h2>
+        <p>Ordered collection, cho phép duplicate elements:</p>
+        
+        <pre><code>// ArrayList - Dynamic array
+List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();
+arrayList.add("Java");
+arrayList.add("Python");
+arrayList.add("Java"); // Duplicate OK
+System.out.println(arrayList.get(0)); // "Java"
+
+// LinkedList - Doubly linked list
+List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
+linkedList.add("First");
+linkedList.add("Second");
+linkedList.addFirst("New First"); // LinkedList specific
+
+// Vector - Thread-safe (legacy)
+List&lt;String&gt; vector = new Vector&lt;&gt;();
+vector.add("Item");</code></pre>
+        
+        <table>
+            <tr>
+                <th>Implementation</th>
+                <th>Ưu điểm</th>
+                <th>Nhược điểm</th>
+                <th>Khi nào dùng</th>
+            </tr>
+            <tr>
+                <td>ArrayList</td>
+                <td>Truy cập nhanh O(1)</td>
+                <td>Thêm/xóa giữa list chậm</td>
+                <td>Đọc nhiều, sửa ít</td>
+            </tr>
+            <tr>
+                <td>LinkedList</td>
+                <td>Thêm/xóa nhanh</td>
+                <td>Truy cập chậm O(n)</td>
+                <td>Thêm/xóa nhiều</td>
+            </tr>
+        </table>
+        
+        <h2>2. Set Interface</h2>
+        <p>Không cho phép duplicate elements:</p>
+        
+        <pre><code>// HashSet - Không có thứ tự, nhanh nhất
+Set&lt;String&gt; hashSet = new HashSet&lt;&gt;();
+hashSet.add("Java");
+hashSet.add("Python");
+hashSet.add("Java"); // Bị bỏ qua
+System.out.println(hashSet.size()); // 2
+
+// LinkedHashSet - Giữ thứ tự insertion
+Set&lt;String&gt; linkedHashSet = new LinkedHashSet&lt;&gt;();
+linkedHashSet.add("C");
+linkedHashSet.add("A");
+linkedHashSet.add("B");
+// Iteration: C, A, B (theo thứ tự thêm)
+
+// TreeSet - Tự động sắp xếp
+Set&lt;String&gt; treeSet = new TreeSet&lt;&gt;();
+treeSet.add("C");
+treeSet.add("A");
+treeSet.add("B");
+// Iteration: A, B, C (alphabetical)</code></pre>
+        
+        <h2>3. Map Interface</h2>
+        <p>Lưu trữ key-value pairs:</p>
+        
+        <pre><code>// HashMap - Nhanh nhất, không có thứ tự
+Map&lt;String, Integer&gt; hashMap = new HashMap&lt;&gt;();
+hashMap.put("Java", 1);
+hashMap.put("Python", 2);
+hashMap.put("JavaScript", 3);
+
+System.out.println(hashMap.get("Java")); // 1
+hashMap.containsKey("Python"); // true
+
+// LinkedHashMap - Giữ thứ tự
+Map&lt;String, Integer&gt; linkedHashMap = new LinkedHashMap&lt;&gt;();
+
+// TreeMap - Tự động sắp xếp theo key
+Map&lt;String, Integer&gt; treeMap = new TreeMap&lt;&gt;();
+
+// Iteration
+for (Map.Entry&lt;String, Integer&gt; entry : hashMap.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}</code></pre>
+        
+        <h2>4. Queue Interface</h2>
+        <p>FIFO (First-In-First-Out) structure:</p>
+        
+        <pre><code>// LinkedList as Queue
+Queue&lt;String&gt; queue = new LinkedList&lt;&gt;();
+queue.offer("First");
+queue.offer("Second");
+queue.poll(); // Lấy và xóa "First"
+queue.peek(); // Xem "Second" không xóa
+
+// PriorityQueue - Tự động sắp xếp
+Queue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;();
+pq.offer(5);
+pq.offer(1);
+pq.offer(3);
+pq.poll(); // 1 (nhỏ nhất)</code></pre>
+        
+        <h2>5. Khi nào dùng gì?</h2>
+        
+        <table>
+            <tr>
+                <th>Nhu cầu</th>
+                <th>Sử dụng</th>
+            </tr>
+            <tr>
+                <td>Lưu danh sách có thứ tự, cho phép duplicate</td>
+                <td>ArrayList</td>
+            </tr>
+            <tr>
+                <td>Thêm/xóa phần tử thường xuyên</td>
+                <td>LinkedList</td>
+            </tr>
+            <tr>
+                <td>Không duplicate, không cần thứ tự</td>
+                <td>HashSet</td>
+            </tr>
+            <tr>
+                <td>Không duplicate, cần sắp xếp</td>
+                <td>TreeSet</td>
+            </tr>
+            <tr>
+                <td>Key-value, tra cứu nhanh</td>
+                <td>HashMap</td>
+            </tr>
+            <tr>
+                <td>Key-value, cần sắp xếp theo key</td>
+                <td>TreeMap</td>
+            </tr>
+            <tr>
+                <td>FIFO queue</td>
+                <td>LinkedList (as Queue)</td>
+            </tr>
+            <tr>
+                <td>Priority queue</td>
+                <td>PriorityQueue</td>
+            </tr>
+        </table>
+        
+        <h2>6. Utility Methods</h2>
+        <pre><code>// Collections utility class
+List&lt;Integer&gt; list = Arrays.asList(3, 1, 4, 1, 5);
+
+Collections.sort(list);           // Sắp xếp
+Collections.reverse(list);        // Đảo ngược
+Collections.shuffle(list);        // Xáo trộn
+Collections.max(list);            // Tìm max
+Collections.min(list);            // Tìm min
+Collections.binarySearch(list, 3); // Tìm kiếm nhị phân</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>Hiểu rõ Collections Framework giúp bạn chọn cấu trúc dữ liệu phù hợp, tối ưu performance. Hãy nhớ:</p>
+        <ul>
+            <li>ArrayList cho random access</li>
+            <li>LinkedList cho frequent insertion/deletion</li>
+            <li>HashSet/HashMap khi cần tốc độ cao</li>
+            <li>TreeSet/TreeMap khi cần sắp xếp</li>
+        </ul>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

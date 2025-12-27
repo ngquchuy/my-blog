@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog </title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (for icons like in the example) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <!-- Main Page Content -->
+    <div id="main-page">
+        
+        <!-- Dark Header -->
+        <header class="header-dark">
+            <div class="header-container">
+                <div class="logo">
+                    <h2><span>WxHuyBlog</span></h2>
+                </div>
+                <nav class="nav-dark">
+                    <ul>
+                        <li><a href="home.html">Trang chủ</a></li>
+                        <li class="active"><a href="index.html">Blog</a></li>
+                        <li><a href="categories.html">Danh mục</a></li>
+                        <li><a href="resume.html">Resume</a></li>
+                        <li><a href="#contact">Liên hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Title Section -->
+        <section class="hero-title">
+            <div class="hero-container">
+                <h1>Blog kỹ thuật - Chia sẻ kiến thức lập trình</h1>
+                <p>Java & JavaScript expertise</p>
+            </div>
+        </section>
+
+        <!-- Main Two-Column Layout -->
+        <div class="main-layout">
+            <!-- Left Column: Blog Posts -->
+            <main class="blog-main">
+             <h1>Bài viết mới nhất</h1>
+             <p>Chia sẻ kiến thức về Java & JavaScript</p>
+             <hr>
+            
+            <!-- Category Filter -->
+            <div class="blog-filter">
+                <label for="category-select" class="filter-label">
+                    <i class="ph ph-funnel"></i> Danh mục:
+                </label>
+                <select id="category-select" class="category-select">
+                    <option value="all">Tất cả</option>
+                    <option value="java">Java</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="spring">Spring Boot</option>
+                    <option value="react">React</option>
+                </select>
+            </div>
+
+             <div class="blog-list" style="margin-top: 30px;">
+                <!-- Post 1 -->
+                <article class="blog-item" data-category="java">
+                    <a href="blog/java-string.html" class="blog-thumb">
+                        <img src="images/java_string_blog.png" alt="Java String">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/java-string.html"><h3>Làm chủ Java String</h3></a>
+                        <span class="blog-date">27/12/2024</span>
+                        <p>Mọi thứ bạn cần biết về String Pool và immutability trong Java.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=java">Java</a>
+                            <a href="categories.html?tag=oop">Core</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-item" data-category="javascript">
+                    <a href="blog/es6-features.html" class="blog-thumb">
+                        <img src="images/es6_features_blog.png" alt="ES6 Features">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/es6-features.html"><h3>Tính năng ES6+</h3></a>
+                        <span class="blog-date">25/12/2024</span>
+                        <p>Arrow function, destructuring và spread operator trong JavaScript hiện đại.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=javascript">JavaScript</a>
+                            <a href="categories.html?tag=es6">ES6+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-item" data-category="spring">
+                    <a href="blog/spring-boot-basics.html" class="blog-thumb">
+                        <img src="images/spring_boot_blog.png" alt="Spring Boot">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/spring-boot-basics.html"><h3>Spring Boot Cơ bản</h3></a>
+                        <span class="blog-date">22/12/2024</span>
+                        <p>Xây dựng REST API đầu tiên với Spring Boot framework.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=java">Java</a>
+                            <a href="categories.html?tag=spring">Spring Boot</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="blog-item" data-category="java">
+                    <a href="blog/oop-java.html" class="blog-thumb">
+                        <img src="images/oop_java_blog.png" alt="OOP Java">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/oop-java.html"><h3>OOP trong Java</h3></a>
+                        <span class="blog-date">20/12/2024</span>
+                        <p>Bốn trụ cột của lập trình hướng đối tượng: Encapsulation, Inheritance, Polymorphism, Abstraction.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=java">Java</a>
+                            <a href="categories.html?tag=oop">OOP</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="blog-item" data-category="javascript">
+                    <a href="blog/async-javascript.html" class="blog-thumb">
+                        <img src="images/async_javascript_blog.png" alt="Async JS">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/async-javascript.html"><h3>Bất đồng bộ trong JS</h3></a>
+                        <span class="blog-date">18/12/2024</span>
+                        <p>Hiểu về Callback, Promise và Async/Await trong JavaScript.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=javascript">JavaScript</a>
+                            <a href="categories.html?tag=async">Async</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="blog-item" data-category="java">
+                    <a href="blog/java-collections.html" class="blog-thumb">
+                        <img src="images/java_collections_blog.png" alt="Java Collections">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/java-collections.html"><h3>Java Collections Framework</h3></a>
+                        <span class="blog-date">15/12/2024</span>
+                        <p>List, Set, Map và khi nào sử dụng chúng trong dự án thực tế.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=java">Java</a>
+                            <a href="categories.html?tag=data-structures">Data Structures</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 7 -->
+                <article class="blog-item" data-category="react">
+                    <a href="blog/react-hooks.html" class="blog-thumb">
+                        <img src="images/react_hooks_blog.png" alt="React Hooks">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/react-hooks.html"><h3>React Hooks là gì?</h3></a>
+                        <span class="blog-date">12/12/2024</span>
+                        <p>Cách sử dụng useState và useEffect hiệu quả trong React.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=javascript">JavaScript</a>
+                            <a href="categories.html?tag=react">React</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 8 -->
+                <article class="blog-item" data-category="java">
+                    <a href="blog/exception-handling.html" class="blog-thumb">
+                        <img src="images/exception_handling_blog.png" alt="Exception Handling">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/exception-handling.html"><h3>Xử lý ngoại lệ trong Java</h3></a>
+                        <span class="blog-date">10/12/2024</span>
+                        <p>Try-catch blocks và custom exceptions cho code robust hơn.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=java">Java</a>
+                            <a href="categories.html?tag=error-handling">Error Handling</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 9 -->
+                <article class="blog-item" data-category="javascript">
+                    <a href="blog/dom-manipulation.html" class="blog-thumb">
+                        <img src="images/dom_manipulation_blog.png" alt="DOM Manipulation">
+                    </a>
+                    <div class="blog-info">
+                        <a href="blog/dom-manipulation.html"><h3>Thao tác DOM với JS</h3></a>
+                        <span class="blog-date">08/12/2024</span>
+                        <p>Cách JavaScript tương tác với HTML và CSS để tạo web interactive.</p>
+                        <div class="blog-tags">
+                            <a href="categories.html?tag=javascript">JavaScript</a>
+                            <a href="categories.html?tag=dom">DOM</a>
+                        </div>
+                    </div>
+                </article>
+             </div>
+
+              <!-- Pagination -->
+              <div class="pagination" id="pagination"></div>
+            </main>
+
+            <!-- Right Column: Sidebar -->
+            <aside class="sidebar">
+                <!-- Profile Widget -->
+                <div class="widget profile-widget">
+                    <h3>Về tôi</h3>
+                    <div class="profile-photo">
+                        <img src="images/avatarAI.png" alt="Huy Profile">
+                    </div>
+                    <h4>Nguyễn Quốc Huy</h4>
+                    <p class="profile-bio">Sinh viên năm 4 đam mê công nghệ. Chuyên về Java và JavaScript development. Chia sẻ kiến thức về lập trình và best practices.</p>
+                    
+                    <div class="social-links-widget">
+                        <a href="https://www.facebook.com/ngquchuy" target="_blank"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://github.com/ngquchuy" target="_blank"><i class="ph ph-github-logo"></i></a>
+                        <a href="https://www.linkedin.com/in/ngquchuy/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    </div>
+                    
+                    <a href="#contact" class="cta-btn">Liên hệ với tôi</a>
+                </div>
+            </aside>
+        </div> <!-- End main-layout -->
+
+        <!-- Simple Contact Section -->
+        <section class="contact-simple" id="contact">
+            <div class="contact-container">
+                <h2>Liên hệ</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="ph ph-envelope"></i>
+                        <span>huy856210@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ph ph-phone"></i>
+                        <span>0363215409</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ph ph-map-pin"></i>
+                        <span>Hồ Chí Minh, Việt Nam</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <h2 class="footer-logo">WxHuyBlog</h2>
+                <ul class="footer-links">
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/ngquchuy"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="https://github.com/ngquchuy" target="_blank"><i class="ph ph-github-logo"></i></a>
+                    <a href="https://www.linkedin.com/in/ngquchuy/" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                </div>
+                <p class="footer-copy">&copy; 2025. Bảo lưu mọi quyền.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

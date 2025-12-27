@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làm chủ Java String - Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-navigation">
+        <a href="../index.html#blog" class="back-btn">
+            <i class="ph ph-arrow-left"></i>
+        </a>
+    </div>
+
+    <div class="blog-content">
+        <!-- Featured Image -->
+        <img src="../images/java_string_blog.png" alt="Java String" class="featured-image">
+        
+        <!-- Blog Text Content -->
+        <div class="blog-text-content">
+            <h1>Làm chủ Java String</h1>
+            
+            <p>String là một trong những kiểu dữ liệu quan trọng nhất trong Java. Hiểu rõ cách String hoạt động sẽ giúp bạn viết code hiệu quả hơn và tránh được nhiều lỗi phổ biến.</p>
+            
+            <h2>1. String là Immutable (Bất biến)</h2>
+        <p>Một đặc điểm quan trọng của String trong Java là nó bất biến. Điều này có nghĩa là sau khi được tạo, giá trị của String không thể thay đổi.</p>
+        
+        <pre><code>String str = "Hello";
+str.concat(" World");
+System.out.println(str); // Vẫn in ra "Hello"
+
+// Để thay đổi, phải gán lại:
+str = str.concat(" World");
+System.out.println(str); // In ra "Hello World"</code></pre>
+        
+        <h2>2. String Pool</h2>
+        <p>Java sử dụng một vùng nhớ đặc biệt gọi là String Pool để lưu trữ các String literals. Điều này giúp tiết kiệm bộ nhớ khi nhiều biến tham chiếu đến cùng một chuỗi.</p>
+        
+        <pre><code>String s1 = "Java";
+String s2 = "Java";
+String s3 = new String("Java");
+
+System.out.println(s1 == s2);     // true (cùng tham chiếu)
+System.out.println(s1 == s3);     // false (khác tham chiếu)
+System.out.println(s1.equals(s3)); // true (cùng giá trị)</code></pre>
+        
+        <h2>3. So sánh String</h2>
+        <p>Luôn sử dụng <code>equals()</code> hoặc <code>equalsIgnoreCase()</code> để so sánh nội dung, không dùng <code>==</code>.</p>
+        
+        <pre><code>String str1 = "Java";
+String str2 = "java";
+
+// So sánh phân biệt hoa thường
+str1.equals(str2);           // false
+
+// So sánh không phân biệt hoa thường
+str1.equalsIgnoreCase(str2); // true</code></pre>
+        
+        <h2>4. Các phương thức hữu ích</h2>
+        <ul>
+            <li><code>length()</code> - Độ dài chuỗi</li>
+            <li><code>charAt(index)</code> - Ký tự tại vị trí index</li>
+            <li><code>substring(start, end)</code> - Chuỗi con</li>
+            <li><code>toLowerCase()</code>, <code>toUpperCase()</code> - Chuyển đổi hoa/thường</li>
+            <li><code>trim()</code> - Xóa khoảng trắng đầu/cuối</li>
+            <li><code>split(regex)</code> - Tách chuỗi thành mảng</li>
+        </ul>
+        
+        <h2>5. StringBuilder vs StringBuffer</h2>
+        <p>Khi cần thay đổi String nhiều lần, hãy sử dụng StringBuilder (không thread-safe) hoặc StringBuffer (thread-safe) thay vì String để tránh tạo nhiều object không cần thiết.</p>
+        
+        <pre><code>StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");
+sb.append("!");
+String result = sb.toString(); // "Hello World!"</code></pre>
+        
+        <h2>Kết luận</h2>
+        <p>Hiểu rõ về String trong Java giúp bạn viết code tối ưu hơn. Hãy nhớ: String là immutable, sử dụng equals() để so sánh, và dùng StringBuilder khi cần thao tác nhiều lần.</p>
+        </div><!-- End blog-text-content -->
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <script>
+        // Scroll to Top Function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/Hide scroll button based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
